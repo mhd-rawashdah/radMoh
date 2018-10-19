@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src = "helperFunction.js"></script>
+	<script type="text/javascript" src = "Db.js"></script>
+	<script type="text/javascript" src = "main.js"></script>
+   
+</head>
+<body>
+	<div class="continer">
+	  <div class="content">	
+	  	
+		<div class="com1">
+			<img id="com1" src="background.jpg">
+			<label id="name1Txt" class="name"></label>
+		</div>
+		<div class="vs">
+			<h1>VS</h1>
+		</div>
+		<div class="com2">
+			<img id="com2" src="">
+			<label id="name2Txt" class="name"></label>
+		</div>
+		 
+	  </div>
+	  <div class="btns">
+			<button id="btnRoll" class="btn">Roll</button>
+		    <button id="btnReset" class="btn">Reset</button>
+		    <button id="btnStart" class="btn">Game Start</button>
+	  </div>
+
+	</div>
+
+	<script type="text/javascript">
+		
+		var btnRoll = $('button#btnRoll');
+		var btnReset = $('button#btnReset');
+		var btnStart = $('button#btnStart');
+
+		var comImg1 = $('img#com1');
+		var comImg2 = $('img#com2');
+
+		var labelName1 = $('label#name1Txt');
+		var labelName2 = $('label#name2Txt');
+ 
+    var randIndex1;
+    var randIndex2;
+    var stop;
+    btnRoll.on('click', function() {
+    	selectCompetitors()
+		});
+
+		btnReset.on('click', function(){
+    	labelName1.text('');
+    	labelName2.text('');  
+    	clearInterval(stop);
+      stop = 0; 
+		})
+
+    btnStart.on('click', function() {
+       var game = '<div class="continer"><div class="header"><div class="player1"><div class="compTxt"><label id="player1Name">Mohammad</label></div><div class="compTxt"> <label id="player1Score">Score 1</label></div></div><div class="timer compTxt"><label id="timerValue">30s</label></div><div class="player2"><div class="compTxt"> <label id="player2Name">Mohammad</label></div><div class="compTxt"> <label id="player2Score">Score1</label></div></div></div><div class="questions"><div class="questionTitle"><h1 id="questionTitle"></h1></div><div class="questionDesc"><p id="questionDesc"></p></div><div class="answers"><div id="answer1" class="answer1"></div><div id="answer2" class="answer2"></div></div></div></div>';
+
+      competitorsDb.competitor1 = mackCompetitor(studentsDb[randIndex1]);
+      competitorsDb.competitor2 = mackCompetitor(studentsDb[randIndex2]);
+      $('body').text('');
+      $('body').append(game);
+      
+      var player1Name = $('label#player1Name');
+	    var player2Name = $('label#player2Name');
+	    var player1Score = $('label#player1Score');
+	    var player2Score = $('label#player2Score');
+
+	    console.log(competitorsDb);
+    
+      player1Name.text(competitorsDb.competitor1.info.firstName);
+      player2Name.text(competitorsDb.competitor2.info.firstName); 
+      player1Score.text(competitorsDb.competitor1.score);
+      player2Score.text(competitorsDb.competitor2.score)
+      showQ();
+      var timer1 = timer();
+      startTimer(timer1);
+	});
+
+
+  function showQ(){
+   
+  $('h1#questionTitle').text('Q1: ' + question1.title);
+  $('p#questionDesc').text(question1.desc);
+  each(question1.answers, function(elem, i){
+  	var $row = '<div><input type="radio" name="player1"><label> A. mohammad</label></div>';
+  	$('input').attr('id', elem.id);
+  	$('label').attr('for', elem.id);
+  	$('label').text(elem.id + '. ' + elem.value);
+  	$('answers').append($row);
+  })
+
+  }
+
+  function startTimer(timer){
+    stop = setInterval(function(){
+     if (timer.time === 0) {
+    	 clearInterval(stop)
+    	 stop = 0;
+    	 return;
+    	}
+      $('label#timerValue').text(timer.decreseTime() + "s");
+    },1000);
+  }  
+
+	function selectCompetitors() {
+			generateRandNames();
+    	 setTimeout(() => {
+    	   clearInterval(stop);
+    	   selector()
+    	 }, 3000)
+	}
+
+	function selector() {	
+	  randIndex1 = randInt(studentsDb.length);
+	  randIndex2 = randInt(studentsDb.length);
+	  if (randIndex1 !== randIndex2) {
+	    labelName1.text(studentsDb[randIndex1].firstName);
+	    labelName2.text(studentsDb[randIndex2].firstName);
+	  } else {
+	    selector();
+	  }
+	}
+
+	function generateRandNames() {
+		stop = setInterval(function () {
+      var student1 = studentsDb[randInt(studentsDb.length)];
+      var student2 = studentsDb[randInt(studentsDb.length)];
+      labelName1.text(student1.firstName);
+      labelName2.text(student2.firstName);
+    }, 100)
+  }
+
+	</script>
+
+</body>
+</html>

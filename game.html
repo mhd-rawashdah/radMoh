@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Game</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src = "helperFunction.js"></script>
+	<script type="text/javascript" src = "Db.js"></script>
+	<script type="text/javascript" src = "main.js"></script>
+</head>
+<body>
+<div class="continer">
+	<div class="header">
+		<div class="player1">
+			<div class="compTxt"> 
+				<label id="player1Name">Mohammad</label>
+			</div>
+			<div class="compTxt"> 
+				<label id="player1Score">Score 1</label>
+			</div>
+		</div>
+		<div class="timer compTxt">
+			<label>30 s</label>
+		</div>
+		<div class="player2">
+			<div class="compTxt"> 
+				<label id="player2Name">Mohammad</label>
+			</div>
+			<div class="compTxt"> 
+				<label id="player2Score">Score 1</label>
+			</div>	
+		</div>
+	</div>
+	<div class="questions">
+		<div class="questionTitle">
+			<h1 id="questionTitle">Questions 1</h1>
+		</div>
+		<div class="questionDesc">
+			<p id="questionDesc">dsajdfdslfkds fdsfolsdhfsd;phsdfsp; dshfsd;fhdsf ;sdfdhsf;sdf dsfbhsdfjsdf sl;fhsdf;shfds;pf shdf;dsfh sd;fsdhfs;dfh sfsdhfsd;fhdf;sdf hsd;fsdhfsdjfhs fsd;fhs;fsh f;shfs;fhs;shf;shfsl;fhfh;fh. fh hfhfhfhsfh hf</p>
+		</div>
+		<div class="answers">
+			<div id="answer1" class="answer1">
+				<div><input type="radio" id="A" name="player1"><label for="A"> A. mohammad</label></div>
+				<div><input type="radio" id="A" name="player1"><label for="A"> B. mohammad</label></div>
+				<div><input type="radio" id="A" name="player1"><label for="A"> C. mohammad</label></div>
+				<div><input type="radio" id="A" name="player1"><label for="A"> D. mohammad</label></div>
+			</div>
+
+			<div id="answer2" class="answer2">
+				<div><input type="radio" id="A" name="player2"><label for="A"> A. mohammad</label></div>
+				<div><input type="radio" id="A" name="player1"><label for="A"> B. mohammad</label></div>
+				<div><input type="radio" id="A" name="player1"><label for="A"> C. mohammad</label></div>
+				<div><input type="radio" id="A" name="player1"><label for="A"> D. mohammad</label></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var player1Name = $('label#player1Name');
+	var player2Name = $('label#player2Name');
+	var player1Score = $('label#player1Score');
+	var player2Score = $('label#player2Score');
+
+	console.log(competitorsDb);
+    
+    // player1Name.text(competitorsDb.competitor1.info.firstName);
+    // player2Name.text(competitorsDb.competitor2.info.firstName); 
+
+</script>
+</body>
+</html>
